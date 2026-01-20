@@ -72,7 +72,11 @@ def progress_existing_deals():
         current_stage = deal['deal_stage']
         # chance a deal moves forward
         if random.random() > 0.3:
-            new_stage = STAGES[STAGES.index(current_stage) + 1]
+            # If at Engaging stage, randomly choose Won or Lost
+            if current_stage == 'Engaging':
+                new_stage = random.choice(['Won', 'Lost'])
+            else:
+                new_stage = STAGES[STAGES.index(current_stage) + 1]
             
             update_data = {"deal_stage": new_stage}
             
@@ -92,3 +96,4 @@ def progress_existing_deals():
 push_new_sales(5)
 
 progress_existing_deals() 
+
