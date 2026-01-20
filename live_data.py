@@ -63,7 +63,7 @@ def progress_existing_deals():
     # 1. Fetch some open deals from Supabase
     response = supabase.table('pipeline') \
         .select("opportunity_id, deal_stage") \
-        .filter("deal_stage", "in", "('Prospecting', 'Engaging')") \
+        .in_("deal_stage", ['Prospecting', 'Engaging']) \
         .limit(30).execute()
     
     deals_to_update = response.data
