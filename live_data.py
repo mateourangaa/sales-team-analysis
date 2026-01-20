@@ -79,7 +79,10 @@ def progress_existing_deals():
                 new_stage = STAGES[STAGES.index(current_stage) + 1]
             
             update_data = {"deal_stage": new_stage}
-            
+
+            # Update engage_date when moving TO Engaging stage
+            if new_stage == 'Engaging':
+                update_data["engage_date"] = datetime.now().strftime("%Y-%m-%d")
             # If the deal is now Closed (Won/Lost), add a close date
             if new_stage in ['Won', 'Lost']:
                 update_data["close_date"] = datetime.now().strftime("%Y-%m-%d")
@@ -96,4 +99,5 @@ def progress_existing_deals():
 push_new_sales(5)
 
 progress_existing_deals() 
+
 
