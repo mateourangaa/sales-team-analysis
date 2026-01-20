@@ -1,0 +1,15 @@
+# Credentials
+.env
+
+# Python junk
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# System junk
+.DS_Store
+Thumbs.db
+
