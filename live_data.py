@@ -64,17 +64,17 @@ def progress_existing_deals():
     response = supabase.table('pipeline') \
         .select("opportunity_id, deal_stage") \
         .in_("deal_stage", ['Prospecting', 'Engaging']) \
-        .limit(30).execute()
+        .limit(10).execute()
     
     deals_to_update = response.data
     
     for deal in deals_to_update:
         current_stage = deal['deal_stage']
         # chance a deal moves forward
-        if random.random() > 0.3:
+        if random.random() > 0.75:
             # If at Engaging stage, randomly choose Won or Lost
             if current_stage == 'Engaging':
-                new_stage = random.choice(['Won', 'Lost'])
+                new_stage = random.choices(['Won', 'Lost'], weights=[25, 75])[0]
             else:
                 new_stage = STAGES[STAGES.index(current_stage) + 1]
             
@@ -96,7 +96,7 @@ def progress_existing_deals():
 
 
 
-push_new_sales(5)
+push_new_sales(10)
 
 progress_existing_deals() 
 
