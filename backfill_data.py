@@ -35,7 +35,7 @@ def run_backfill(count=200):
         engage_date = datetime.now() - timedelta(days=days_ago)
         
         # SPREAD STAGES: Most are Prospecting/Engaging, some are Won/Lost
-        stage = random.choices(STAGES, weights=[30, 40, 20, 10], k=1)[0]
+        stage = random.choices(STAGES, weights=[50, 30, 5, 15], k=1)[0]
         
         record = {
             "opportunity_id": generate_opportunity_id(),
